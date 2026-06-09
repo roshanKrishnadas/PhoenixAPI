@@ -1,23 +1,26 @@
 package com.APITest;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
+import static io.restassured.http.ContentType.JSON;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.lessThan;
 
-import static io.restassured.http.ContentType.*;
-
-import static org.hamcrest.Matchers.*;
+import java.io.IOException;
 
 import org.testng.annotations.Test;
 
 import com.api.pojo.UserCredentails;
+import com.api.utils.configManager;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class LoginAPITest {
 UserCredentails user=new UserCredentails("iamfd", "password");
     @Test
-	public void loginTest() {
+	public void loginTest() throws IOException {
+    	
 		  given()
-		     .baseUri("http://64.227.160.186:9000/v1")
+		     .baseUri(configManager.getProperty("BASE_URI"))
 		     .headers("Content-Type","application/json")
 		     .and()
 		     .accept(JSON)
