@@ -16,20 +16,13 @@ public class configManager {
 		env=System.getProperty("env","qa");
 		env=env.toLowerCase().trim();
 		switch(env) {
-		case "dev":{
-			path="config/configdev.properties";
-			break;
-		}
-		case "qa":{
-			path="config/configqa.properties";
-			break;
-		}
-		case "uat":{
-			path="config/configuat.properties";
-			break;
-		}
-		default :
-		path="config/config.properties";
+		case "dev" -> path="config/configdev.properties";
+		
+		case "qa" -> path="config/configqa.properties";
+			
+		case "uat" -> path="config/configuat.properties";
+			
+		default -> path="config/config.properties";
 		}
 		//pointing to config file
 		InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
@@ -40,7 +33,7 @@ public class configManager {
 			
 			//load the properties file with load()
 			p.load(input);
-		} catch (FileNotFoundException e) {;
+		} catch (FileNotFoundException e) {
 			
 			e.printStackTrace();
 		}
@@ -49,7 +42,7 @@ public class configManager {
 		  e.printStackTrace();
 		}
 	}
-	public static String getProperty(String key) throws IOException {
+	public static String getProperty(String key) {
 		
 	 return p.getProperty(key);
 		
