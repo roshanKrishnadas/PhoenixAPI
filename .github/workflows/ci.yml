@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Phoenix API Automation
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
         cache: maven
         
     - name: Phoenix API Execution
-      run: mvn clean test -DsuiteXmlFile=testng.xml -Denv={{ $github.event.inputs.env }}
+      run: mvn clean test -DsuiteXmlFile=testng.xml -Denv=${{ github.event.inputs.env }}
       
     - name: Upload a Build Artifact
       if: always()
