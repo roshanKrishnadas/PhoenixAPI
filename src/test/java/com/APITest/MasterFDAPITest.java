@@ -46,7 +46,7 @@ public class MasterFDAPITest {
 		.body("data.mst_model.size()", greaterThan(0))
 		.body("data.mst_oem.id", everyItem(notNullValue()))
 		.body("data.mst_model.name", everyItem(notNullValue()))
-		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("Response_Schema/MAsterFd.json"));
+		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("Response_Schema/MasterFD.json"));
 	   
 		
 	}
