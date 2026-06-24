@@ -1,9 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Phoenix suite " verbose="1">
+<suite name="PhoenixAPI suite" verbose="1">
   
-
-  <test name="Inward flow -1">
+<test name="Inward flow1">
     <classes>
       <class name="com.APITest.LoginAPITest"/>
       <class name="com.APITest.UserdetailsAPITest"/>
