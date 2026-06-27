@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 import com.api.constant.Role;
 import com.api.utils.AuthTokenGenerator;
+import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 
@@ -20,22 +21,11 @@ public class MasterFDAPITest {
 	@Test
 	public void createJobFd() {
 		given()
-		.baseUri(getProperty("BASE_URI"))
-		.contentType(" ")
-		.and()
-		//.accept(ANY)
-		.and()
-		.header("Authorization",AuthTokenGenerator.getToken(Role.FD))
-		
-		.log().uri()
-		.log().headers()
-		.log().method()
+		.spec(SpecUtil.requestWithAuth(Role.FD))
 	   .when()
 	    .post("/master")
 	   .then()
-	    .log().body()
-	    .statusCode(200)
-	    .time(lessThan(1000L))
+	    .spec(SpecUtil.responseSpec_OK())
 	    .body("message", equalTo("Success"))
 	    .body("data", notNullValue())
 		.body("data",hasKey("mst_oem"))
@@ -53,21 +43,11 @@ public class MasterFDAPITest {
 	@Test
 	public void createJob_MissingHeaders() {
 		given()
-		.baseUri(getProperty("BASE_URI"))
-		.contentType(" ")
-		.and()
-		//.accept(ANY)
-		.and()
-		.header("Authorization"," ")
-		
-		.log().uri()
-		.log().headers()
-		.log().method()
+		.spec(SpecUtil.requestSpec())
 	   .when()
 	    .post("/master")
 	   .then()
-	    .log().body()
-	    .statusCode(401);
+	    .spec(SpecUtil.responseSpec_textHTML(401));
 	}
 
 }

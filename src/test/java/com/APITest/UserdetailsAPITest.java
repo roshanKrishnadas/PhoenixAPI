@@ -11,6 +11,7 @@ import java.io.IOException;
 import org.testng.annotations.Test;
 
 import com.api.constant.Role;
+import com.api.utils.SpecUtil;
 
 import static com.api.constant.Role.*;
 
@@ -26,21 +27,13 @@ public class UserdetailsAPITest {
 	@Test
 	public void userDetailsTest() throws IOException {
 		
-		Header authheader=new Header("Authorization", getToken(ENG));
+		
 		given()
-		 .baseUri(getProperty("BASE_URI"))
-		 .header(authheader)
-		 .contentType(JSON)
-		 .accept(ANY)
-		 .log().uri()
-		 .log().method()
-		 .log().headers()
+		 .spec(SpecUtil.requestWithAuth(FD))
 		.when()
 		 .get("userdetails")
 	    .then()
-	     .log().body()
-	     .statusCode(200)
-	     .time(lessThan(1500L))
+	     .spec(SpecUtil.responseSpec_OK())
 	     .body("message",equalTo("Success"))
 	     //.body("data.first_name", equalTo("fd"))
 	     //.body("data.id",equalTo(4))

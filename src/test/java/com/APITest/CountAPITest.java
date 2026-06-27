@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import com.api.constant.Role;
 import com.api.utils.AuthTokenGenerator;
-
+import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 
@@ -21,19 +21,11 @@ public class CountAPITest {
      @Test
 	public void verifyCount() {
 		given()
-		 .baseUri(getProperty("BASE_URI"))
-		 .contentType(JSON)
-		 .and()
-		 .accept(ANY)
-		 .header("Authorization",AuthTokenGenerator.getToken(Role.FD))
-		 .log().uri()
-		 .log().headers()
+		 .spec(SpecUtil.requestWithAuth(Role.FD))
 	    .when()
 	     .get("/dashboard/count")
 	    .then()
-	    .log().body()
-	     .statusCode(200)
-	     .time(lessThan(1000L))
+	     .spec(SpecUtil.responseSpec_OK())
 	     .body("message",equalTo("Success"))
 		 .body("data", notNullValue())
 		 .body("data.size()",equalTo(3))
@@ -46,16 +38,10 @@ public class CountAPITest {
      @Test
      public void countFd_MissingHeaders() {
     	 given()
-		 .baseUri(getProperty("BASE_URI"))
-		 .contentType(JSON)
-		 .and()
-		 .accept(ANY)
-		 .log().uri()
-		 .log().headers()
+		 .spec(SpecUtil.requestSpec())
 	    .when()
 	     .get("/dashboard/count")
 	    .then()
-	     .log().all()
-	     .statusCode(401);
+	     .spec(SpecUtil.responseSpec_textHTML(401));
      }
 }
