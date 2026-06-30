@@ -9,11 +9,11 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import com.api.constant.Role;
-import com.api.pojo.CreateJobFD;
-import com.api.pojo.FDCustomerAddess;
-import com.api.pojo.FDCustomerProduct;
-import com.api.pojo.FdCustomerData;
-import com.api.pojo.Problems;
+import com.api.request.model.CreateJobFD;
+import com.api.request.model.FDCustomerAddess;
+import com.api.request.model.FDCustomerProduct;
+import com.api.request.model.FdCustomerData;
+import com.api.request.model.Problems;
 import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
