@@ -14,6 +14,7 @@ import com.api.request.model.FDCustomerAddess;
 import com.api.request.model.FDCustomerProduct;
 import com.api.request.model.FdCustomerData;
 import com.api.request.model.Problems;
+import com.api.utils.DateTimeUtil;
 import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -28,7 +29,7 @@ public class CreateJobAPITest {
 		List<Problems>problem=new ArrayList<Problems>();
 		problem.add(problem1);
 		
-		FDCustomerProduct customerproduct=new FDCustomerProduct("2026-02-01T18:30:00.000Z", "124467466792792", "124467466792792", "124467466792792", "2026-02-01T18:30:00.000Z", 1, 1);
+		FDCustomerProduct customerproduct=new FDCustomerProduct(DateTimeUtil.getTimeWithDaysAgo(01), "125467466792792", "125467466792792", "125467466792792", DateTimeUtil.getTimeWithDaysAgo(01), 1, 1);
 		FDCustomerAddess customerAdd=new FDCustomerAddess("helloflAT", "namsate aprt", "gajANAN", "wola", "400708", "560023", "mh", "");
 		FdCustomerData customer= new FdCustomerData("ros", "hos", "1234967891", "", "hos@gmail.com", "");
 		CreateJobFD createjobfd=new CreateJobFD(0, 2, 1, 1, customer, customerAdd, customerproduct, problem);
