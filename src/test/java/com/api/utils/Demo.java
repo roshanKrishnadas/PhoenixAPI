@@ -13,6 +13,13 @@ public class Demo {
  public void setB(int b) {
 	 b=3;
  }
+ public int getIntA() {
+	 return a;
+ }
+ public int getIntB() {
+	 return b;
+ }
+ 
 	public static void main(String[] args) {
 		System.out.println(System.getProperty("user.dir"));
 		
