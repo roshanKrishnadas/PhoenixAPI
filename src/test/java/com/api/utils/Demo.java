@@ -7,7 +7,12 @@ public class Demo {
 	 this.a=a;
 	 this.b=b;
  }
- 
+ public void setA(int a) {
+	 a=3;
+ }
+ public void setB(int b) {
+	 b=3;
+ }
 	public static void main(String[] args) {
 		System.out.println(System.getProperty("user.dir"));
 		
