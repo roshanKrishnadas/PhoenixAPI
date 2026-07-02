@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.*;
 import static com.api.constant.Role.*;
 
 import com.api.constant.Role;
-import com.api.pojo.UserCredentails;
+import com.api.request.model.UserCredentails;
 
 import static com.api.utils.configManager.*;
 
