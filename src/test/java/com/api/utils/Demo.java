@@ -22,6 +22,8 @@ public class Demo {
  
 	public static void main(String[] args) {
 		System.out.println(System.getProperty("user.dir"));
+		Demo d =new Demo(1, 1);
+		System.out.println(d.a +","+d.b);
 		
       
 	}
