@@ -8,6 +8,7 @@
       <class name="com.APITest.UserdetailsAPITest"/>
       <class name="com.APITest.CountAPITest"/>
       <class name="com.APITest.MasterFDAPITest"/>
+       <class name="com.APITest.CreateJobAPITest"/>
     </classes>
   </test>
 </suite>
