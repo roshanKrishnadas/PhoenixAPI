@@ -1,16 +1,11 @@
-package com.demo.csv;
+package com.dataproviders.api.bean;
 
-public class UserPOJO {
+public class UserBEAN{
 	private String username;
 	private String password;
 	
-	public UserPOJO() {
+	public UserBEAN() {
 		
-	}
-	public UserPOJO(String username,String password) {
-		super();
-		this.username=username;
-		this.password=password;
 	}
 	
 	public String getUsername() {
@@ -22,7 +17,7 @@ public class UserPOJO {
 	
 	@Override
 	public String toString() {
-		return "UserPOJO [username=" + username + ", password=" + password + "]";
+		return "UserBEAN [username=" + username + ", password=" + password + "]";
 	}
 
 	public void setUsername(String username) {
