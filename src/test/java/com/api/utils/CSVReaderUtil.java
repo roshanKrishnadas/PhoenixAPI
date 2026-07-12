@@ -21,21 +21,21 @@ public class CSVReaderUtil {
 		
 	}
 	
-public static Iterator<UserBEAN> loadCSVFile(String pathOfCSVFile) {
+public static <T> Iterator<T> loadCSVFile(String pathOfCSVFile,Class<T> bean) {
 		
 		InputStream ip = Thread.currentThread().getContextClassLoader().getResourceAsStream(pathOfCSVFile);
 		InputStreamReader ir=new InputStreamReader(ip);
 		CSVReader  csvRea=new CSVReader(ir);
 		
-		
-      CsvToBean<UserBEAN> csb =new CsvToBeanBuilder(csvRea)
-    		                   .withType(UserBEAN.class)
+		//Class<UserBEAN> bean=UserBEAN.class;
+      CsvToBean<T> csb =new CsvToBeanBuilder(csvRea)
+    		                   .withType(bean)
     		                   .withIgnoreEmptyLine(true)
     		                   .build();
       
-       List<UserBEAN> userList = csb.parse();
+       List<T> List = csb.parse(); 
        
-               return userList.iterator();
+               return List.iterator();
       
 	}
 }
