@@ -52,7 +52,7 @@ public class Faker_Demo2 {
 		
 		String fakeRemark=faker.lorem().sentence(5);
 		Random random=new Random();
-		int problemID=random.nextInt(26)+1;
+		int problemID=random.nextInt(27)+1;
 		Problems problem=new Problems(problemID, fakeRemark);
 		
 		List<Problems> problemList=new ArrayList<Problems>();
