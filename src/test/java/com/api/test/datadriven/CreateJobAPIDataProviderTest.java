@@ -13,7 +13,7 @@ import com.api.request.model.CreateJobFD;
 
 public class CreateJobAPIDataProviderTest {
 	
-	@Test(description="verifying the CreateJobAPITest is able to create the IN-Warranty job",groups= {"api","regression","smoke"},
+	@Test(description="verifying the CreateJobAPITest is able to create the IN-Warranty job",groups= {"api","regression","smoke","csv"},
 			dataProviderClass = com.dataproviders.DataProvidersUtils.class,
 			dataProvider = "CreateJobAPIDataProvider"
 			)

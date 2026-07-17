@@ -36,7 +36,11 @@ public static Iterator<UserBEAN> loginAPIDataProvider() {
 	
 	@DataProvider(name="CreateJobAPIFakeDataProvider",parallel=true)
 	public static Iterator<CreateJobFD> createJobAPIFakeDataProvider() {
-		Iterator<CreateJobFD> createJobPayload = FakerDataGenerator.generateFakerCreateJobData(5);
+		String fakercount=System.getProperty("fakercount", "5");
+		int fakercountInt = Integer.parseInt(fakercount);
+		
+		
+		Iterator<CreateJobFD> createJobPayload = FakerDataGenerator.generateFakerCreateJobData(fakercountInt);
 		return createJobPayload;
 		}
 		

@@ -17,7 +17,7 @@ public class CreateJobAPIFakerDataProviderTest {
 	
 	
 	@Test(description =" verify creatJob created 100 new job" ,
-			groups = {"api","smoke","datadriven"},
+			groups = {"api","smoke","datadriven","faker"},
 	dataProviderClass = com.dataproviders.DataProvidersUtils.class,
 	dataProvider = "CreateJobAPIFakeDataProvider")
 	
