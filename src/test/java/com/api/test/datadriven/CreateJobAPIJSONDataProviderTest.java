@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import com.api.constant.Role;
 import com.api.request.model.CreateJobFD;
 
-public class CreateJobAPIJSONDataProviderTest2 {
+public class CreateJobAPIJSONDataProviderTest {
 	
 	
 	
