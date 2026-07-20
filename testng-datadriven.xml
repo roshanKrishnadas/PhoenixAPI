@@ -7,6 +7,7 @@
       <class name="com.api.test.datadriven.CreateJobAPIDataProviderTest"/>
       <class name="com.api.test.datadriven.CreateJobAPIFakerDataProviderTest"/>
       <class name="com.api.test.datadriven.LoginAPIDataProviderTest"/>
+      <class name="com.api.test.datadriven.LoginAPIJSONDataProviderTest"/>
       
     </classes>
   </test>
