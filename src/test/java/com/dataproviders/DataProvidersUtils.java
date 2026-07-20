@@ -47,7 +47,14 @@ public static Iterator<UserBEAN> loginAPIDataProvider() {
 		}
 	@DataProvider(name = "LoginAPIJSONDataProvider",parallel = true)
 	public static Iterator<UserCredentails> loginAPIJSONDataProvider() {
-			return JSONReaderUtil.loadJSON("testData/test.json",UserCredentails[].class);
+			return JSONReaderUtil.loadJSON("testData/LoginAPI.json",UserCredentails[].class);
 			
 	}
+	
+	@DataProvider(name = "CreateJobAPIJSONDataProvider",parallel = true)
+	public static Iterator<CreateJobFD> CreateJobAPIJSONDataProvider() {
+			return JSONReaderUtil.loadJSON("testData/CreateJob.json",CreateJobFD[].class);
+			
+	}
+	
 }
