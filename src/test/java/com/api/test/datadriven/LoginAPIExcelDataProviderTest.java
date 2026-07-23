@@ -23,10 +23,10 @@ public class LoginAPIExcelDataProviderTest {
     		dataProvider = "LoginAPIExcelDataProvider"
     		
     		)
-	public void loginTest(UserCredentails userCreds)  {
+	public void loginTest(UserBEAN user)  {
     	
 		  given()
-		     .spec(requestSpec(userCreds))
+		     .spec(requestSpec(user))
 		    .when()
 		     .post("login")
 		  .then() 

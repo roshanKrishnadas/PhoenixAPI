@@ -59,8 +59,8 @@ public static Iterator<UserBEAN> loginAPIDataProvider() {
 			
 	}
 	@DataProvider(name = "LoginAPIExcelDataProvider",parallel = true)
-	public static Iterator<UserCredentails> LoginAPIExcelDataProvider() {
-			return ExcelReaderUtils.loadExcelFile();
+	public static Iterator<UserBEAN> LoginAPIExcelDataProvider() {
+			return ExcelReaderUtils.loadExcelFile("LoginTestData", UserBEAN.class);
 			
 	}
 	
