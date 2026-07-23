@@ -15,9 +15,9 @@ public class ExcelReaderUtils {
 private ExcelReaderUtils(){
 	
 }
-	public static <T> Iterator<T> loadExcelFile(String sheetName,Class<T> clazz)  {
+	public static <T> Iterator<T> loadExcelFile(String xlxsFile,String sheetName,Class<T> clazz)  {
 		
-		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("testdata/Pheonixtestdata.xlsx");
+		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(xlxsFile);
 		            XSSFWorkbook xssfWB=null;;
 		            XSSFSheet mysheet=null;
 					try {
