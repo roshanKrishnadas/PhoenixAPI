@@ -1,8 +1,9 @@
 package com.database;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
-public class JDBCDemo {
+public class JDBCDemo2 {
 
 	public static void main(String[] args) throws SQLException {
 		/*
@@ -16,16 +17,9 @@ public class JDBCDemo {
 		 * mobile_number=result.getString("mobile_number");
 		 * System.out.println(first_name + "|" + last_name + "|" + mobile_number); }
 		 */
-		DataBaseManagerOld.createConnection(); 
-		long startTime=System.currentTimeMillis();
-		for(int i=1;i<=10000;i++) {
-		DataBaseManagerOld.createConnection(); 
-		DataBaseManagerOld.createConnection(); 
-		DataBaseManagerOld.createConnection(); 
-		DataBaseManagerOld.createConnection(); 
-		}
-		long endTime=System.currentTimeMillis();
-		System.out.println("totalDuration " + (endTime-startTime) + "ms");
+		Connection con = DataBaseManager.getConnection(); 
+		
+		System.out.println(con);
 	}
 
 }
