@@ -14,6 +14,7 @@ import com.api.utils.CreateJobMapper;
 import com.api.utils.ExcelReaderUtils;
 import com.api.utils.FakerDataGenerator;
 import com.api.utils.JSONReaderUtil;
+import com.database.dao.CreateJobPayloadDataDao;
 import com.dataproviders.api.bean.CreateJobBean;
 import com.dataproviders.api.bean.UserBEAN;
 
@@ -77,4 +78,17 @@ public static Iterator<UserBEAN> loginAPIDataProvider() {
 	}
 	
 	
+	@DataProvider(name="CreateJobAPIDBDataProvider",parallel=true)
+	public static Iterator<CreateJobFD> CreateJobAPIDBDataProvider() {
+		List<CreateJobBean> beanList = CreateJobPayloadDataDao.getCreateJobPayloadData();
+		List<CreateJobFD> payloadList=new ArrayList<CreateJobFD>();
+		
+		for (CreateJobBean bean : beanList) {
+			CreateJobFD payload = CreateJobMapper.mapper(bean);
+			payloadList.add(payload);
+			
+			
+		}
+		return payloadList.iterator();
+	}
 }

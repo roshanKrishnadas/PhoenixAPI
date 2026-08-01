@@ -11,6 +11,7 @@
       <class name="com.api.test.datadriven.CreateJobAPIJSONDataProviderTest"/>
       <class name="com.api.test.datadriven.LoginAPIExcelDataProviderTest"/>
       <class name="com.api.test.datadriven.CreateJobAPIExcelDataProviderTest"/>
+      <class name="com.api.test.datadriven.CreateJobAPIDBDataProviderTest"/>
       
       
     </classes>
