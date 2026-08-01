@@ -1,10 +1,7 @@
 package com.database;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import org.apache.commons.collections.bag.SynchronizedSortedBag;
 
 import com.api.utils.configManager;
 import com.zaxxer.hikari.HikariConfig;
