@@ -102,7 +102,7 @@ public class CreateJobPayloadDataDao {
 		} catch (SQLException e) {
 			
 		}
-		System.out.println(beanList);
+		
 		return beanList;
 	}
 }
