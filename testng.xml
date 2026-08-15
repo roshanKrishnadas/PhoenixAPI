@@ -9,6 +9,12 @@
       <class name="com.APITest.CountAPITest"/>
       <class name="com.APITest.MasterFDAPITest"/>
        <class name="com.APITest.CreateJobAPITest"/>
+       <class name="com.APITest.LoginAPIExcelDataProviderTest"/>
+       <class name="com.APITest.CreateJobAPIExcelDataProviderTest"/>
+       <class name="com.APITest.CreateJobAPIDBDataProviderTest"/>
+       <class name="com.APITest.CreateJobAPIWithDBValidationTest"/>
+       <class name="com.APITest.CreateJobAPIWithDBValidationRespModelTest"/>
+       
     </classes>
   </test>
 </suite>

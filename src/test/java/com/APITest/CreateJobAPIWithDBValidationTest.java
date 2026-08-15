@@ -39,7 +39,7 @@ import static com.api.utils.SpecUtil.*;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
-public class CreateJobAPITestWithDBValidation {
+public class CreateJobAPIWithDBValidationTest {
 	private CreateJobFD createjobfd;
 	private FdCustomerData customer;
 	private FDCustomerAddess customerAdd;
