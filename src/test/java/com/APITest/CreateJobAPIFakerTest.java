@@ -32,7 +32,7 @@ import static com.api.utils.SpecUtil.*;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
-public class CreateJobAPITest2 {
+public class CreateJobAPIFakerTest {
 	private CreateJobFD createjobfd;
 	
 	//probel pojo class
