@@ -27,9 +27,11 @@ import com.api.response.model.CreateJobResponse;
 import com.api.utils.DateTimeUtil;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
+import com.database.dao.CustomerProblemsDao;
 import com.database.dao.CustomerProductDao;
 import com.database.models.CustomerAddressDBModel;
 import com.database.models.CustomerDBModel;
+import com.database.models.CustomerProblemsDBModel;
 import com.database.models.CustomerProductDBModel;
 
 import io.restassured.response.Response;
@@ -107,7 +109,11 @@ public class CreateJobAPITestWithDBValidation2 {
 	  Assert.assertEquals(customerProductActualInfo.getImei2(),customerproduct.imei2()); 
 	  Assert.assertEquals(customerProductActualInfo.getSerial_number(),customerproduct.serial_number());
 	  
-	 
+	  int tr_job_head_id = response.getData().getId();
+		 CustomerProblemsDBModel customerProblemsActualInfo = CustomerProblemsDao.getCustomerProblem(tr_job_head_id);
+		 Assert.assertEquals(customerProblemsActualInfo.getMst_problem_id(), createjobfd.problems().get(0).id());
+		 Assert.assertEquals(customerProblemsActualInfo.getRemark(), createjobfd.problems().get(0).remark());
+		 
 		 
 	}
 

@@ -26,9 +26,11 @@ import com.api.request.model.Problems;
 import com.api.utils.DateTimeUtil;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
+import com.database.dao.CustomerProblemsDao;
 import com.database.dao.CustomerProductDao;
 import com.database.models.CustomerAddressDBModel;
 import com.database.models.CustomerDBModel;
+import com.database.models.CustomerProblemsDBModel;
 import com.database.models.CustomerProductDBModel;
 
 import io.restassured.response.Response;
@@ -42,15 +44,16 @@ public class CreateJobAPITestWithDBValidation {
 	private FdCustomerData customer;
 	private FDCustomerAddess customerAdd;
 	private FDCustomerProduct customerproduct;
+	List<Problems> problem;
 	//probel pojo class
 	@BeforeTest(description="creates the CreateJobAPI payload ")
 	public void setUp() {
 		Problems problem1=new Problems(Problem.Poor_battery_life.getCode(), "screen issue");
 		//declaration initilaizatio of array type is Problems which we have created the POJO
-		List<Problems>problem=new ArrayList<Problems>();
+	problem=new ArrayList<Problems>();
 		problem.add(problem1);
 		
-		customerproduct=new FDCustomerProduct(DateTimeUtil.getTimeWithDaysAgo(01), "027467497792798", "027467497792798", "027467497792798", DateTimeUtil.getTimeWithDaysAgo(01), Product.NEXUS_2.getCode(), MstModelId.Nexus_2blue.getMstModelId());
+		customerproduct=new FDCustomerProduct(DateTimeUtil.getTimeWithDaysAgo(01), "127467497792798", "127467497792798", "127467497792798", DateTimeUtil.getTimeWithDaysAgo(01), Product.NEXUS_2.getCode(), MstModelId.Nexus_2blue.getMstModelId());
 		 customerAdd=new FDCustomerAddess("ganeshflat", "namse_aprt", "gajANANJI", "wolahah", "400708", "560024", "mh", "");
 		 customer= new FdCustomerData("rojks", "hmos", "1834967893", "", "hosaa@gmail.com", "");
 		createjobfd=new CreateJobFD(ServiceLocation.SERVICE_LOCATION_A.getCode(), Platform.Front_Desk.getCode(), Warranty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getCode(), customer, customerAdd, customerproduct, problem);
@@ -104,7 +107,10 @@ public class CreateJobAPITestWithDBValidation {
 		 Assert.assertEquals(customerProductActualInfo.getImei2(),customerproduct.imei2() );
 		 Assert.assertEquals(customerProductActualInfo.getSerial_number(),customerproduct.serial_number());
 		 
-		                         
+		 int tr_job_head_id = response.then().extract().body().jsonPath().getInt("data.id");  
+		 CustomerProblemsDBModel customerProblemsActualInfo = CustomerProblemsDao.getCustomerProblem(tr_job_head_id);
+		 Assert.assertEquals(customerProblemsActualInfo.getMst_problem_id(), createjobfd.problems().get(0).id());
+		 Assert.assertEquals(customerProblemsActualInfo.getRemark(), createjobfd.problems().get(0).remark());
 		 
 	}
 
