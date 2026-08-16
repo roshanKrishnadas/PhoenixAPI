@@ -26,10 +26,12 @@ import com.api.request.model.Problems;
 import com.api.utils.DateTimeUtil;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
+import com.database.dao.CustomerJobHeadDAO;
 import com.database.dao.CustomerProblemsDao;
 import com.database.dao.CustomerProductDao;
 import com.database.models.CustomerAddressDBModel;
 import com.database.models.CustomerDBModel;
+import com.database.models.CustomerJobHeadDBModel;
 import com.database.models.CustomerProblemsDBModel;
 import com.database.models.CustomerProductDBModel;
 
@@ -53,7 +55,7 @@ public class CreateJobAPIWithDBValidationTest {
 	problem=new ArrayList<Problems>();
 		problem.add(problem1);
 		
-		customerproduct=new FDCustomerProduct(DateTimeUtil.getTimeWithDaysAgo(01), "127467497792798", "127467497792798", "127467497792798", DateTimeUtil.getTimeWithDaysAgo(01), Product.NEXUS_2.getCode(), MstModelId.Nexus_2blue.getMstModelId());
+		customerproduct=new FDCustomerProduct(DateTimeUtil.getTimeWithDaysAgo(01), "227467497792798", "227467497792798", "227467497792798", DateTimeUtil.getTimeWithDaysAgo(01), Product.NEXUS_2.getCode(), MstModelId.Nexus_2blue.getMstModelId());
 		 customerAdd=new FDCustomerAddess("ganeshflat", "namse_aprt", "gajANANJI", "wolahah", "400708", "560024", "mh", "");
 		 customer= new FdCustomerData("rojks", "hmos", "1834967893", "", "hosaa@gmail.com", "");
 		createjobfd=new CreateJobFD(ServiceLocation.SERVICE_LOCATION_A.getCode(), Platform.Front_Desk.getCode(), Warranty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getCode(), customer, customerAdd, customerproduct, problem);
@@ -111,6 +113,15 @@ public class CreateJobAPIWithDBValidationTest {
 		 CustomerProblemsDBModel customerProblemsActualInfo = CustomerProblemsDao.getCustomerProblem(tr_job_head_id);
 		 Assert.assertEquals(customerProblemsActualInfo.getMst_problem_id(), createjobfd.problems().get(0).id());
 		 Assert.assertEquals(customerProblemsActualInfo.getRemark(), createjobfd.problems().get(0).remark());
+		 
+		 CustomerJobHeadDBModel customerJobHeadActualInfo = CustomerJobHeadDAO.getCustomerJobHeadInfo(customerID);
+		 Assert.assertEquals(customerJobHeadActualInfo.getMst_oem_id(),createjobfd.mst_oem_id());
+		 Assert.assertEquals(customerJobHeadActualInfo.getMst_platform_id(), createjobfd.mst_platform_id());
+		 Assert.assertEquals(customerJobHeadActualInfo.getMst_service_location_id(), createjobfd.mst_service_location_id());
+		 Assert.assertEquals(customerJobHeadActualInfo.getMst_warrenty_status_id(), createjobfd.mst_warrenty_status_id());
+		
+		 
+		 
 		 
 	}
 

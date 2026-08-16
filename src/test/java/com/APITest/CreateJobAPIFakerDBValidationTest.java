@@ -1,41 +1,25 @@
 package com.APITest;
 
+import static com.api.utils.SpecUtil.requestWithAuth;
+import static com.api.utils.SpecUtil.responseSpec_OK;
 import static io.restassured.RestAssured.given;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.api.constant.MstModelId;
-import com.api.constant.OEM;
-import com.api.constant.Platform;
-import com.api.constant.Problem;
-import com.api.constant.Product;
 import com.api.constant.Role;
-import com.api.constant.ServiceLocation;
-import com.api.constant.Warranty_Status;
 import com.api.request.model.CreateJobFD;
-import com.api.request.model.FDCustomerAddess;
-import com.api.request.model.FDCustomerProduct;
 import com.api.request.model.FdCustomerData;
-import com.api.request.model.Problems;
-import com.api.utils.DateTimeUtil;
 import com.api.utils.FakerDataGenerator;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
+import com.database.dao.CustomerJobHeadDAO;
 import com.database.models.CustomerAddressDBModel;
 import com.database.models.CustomerDBModel;
-import com.github.javafaker.Faker;
-
-import static com.api.utils.SpecUtil.*;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.*;
+import com.database.models.CustomerJobHeadDBModel;
 
 public class CreateJobAPIFakerDBValidationTest {
 	private CreateJobFD createjobfd;
@@ -82,6 +66,18 @@ public class CreateJobAPIFakerDBValidationTest {
 	        		 Assert.assertEquals(customerAddactualInfo.getPincode(), createjobfd.customer_address().pincode());
 	        		 Assert.assertEquals(customerAddactualInfo.getState(), createjobfd.customer_address().state());
 	        		 Assert.assertEquals(customerAddactualInfo.getStreet_name(), createjobfd.customer_address().street_name());
+	        		 
+
+	        		 
+	        		 
+	        		 CustomerJobHeadDBModel customerJobHeadActualInfo = CustomerJobHeadDAO.getCustomerJobHeadInfo(customerId);
+	        		 Assert.assertEquals(customerJobHeadActualInfo.getMst_oem_id(),createjobfd.mst_oem_id());
+	        		 Assert.assertEquals(customerJobHeadActualInfo.getMst_platform_id(), createjobfd.mst_platform_id());
+	        		 Assert.assertEquals(customerJobHeadActualInfo.getMst_service_location_id(), createjobfd.mst_service_location_id());
+	        		 Assert.assertEquals(customerJobHeadActualInfo.getMst_warrenty_status_id(), createjobfd.mst_warrenty_status_id());
+	        		
+	        		 
+	        		 
 	        		
 	                 
 	                 
