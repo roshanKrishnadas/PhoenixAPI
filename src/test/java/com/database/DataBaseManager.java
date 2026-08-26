@@ -3,14 +3,15 @@ package com.database;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import com.api.utils.EnvUtility;
 import com.api.utils.configManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 public class DataBaseManager {
-	public static final String DB_URL=configManager.getProperty("DB_URL");
-	public static final String DB_USER_NAME=configManager.getProperty("DB_USERNAME");
-	public static final String DB_PASSWORD= configManager.getProperty("DB_PASSWORD");
+	public static final String DB_URL=EnvUtility.getValue("DB_URL");
+	public static final String DB_USER_NAME=EnvUtility.getValue("DB_USERNAME");
+	public static final String DB_PASSWORD= EnvUtility.getValue("DB_PASSWORD");
 	public static final int MAXIMUM_POOL_SIZE=Integer.parseInt(configManager.getProperty("MAXIMUM_POOL_SIZE"));
 	public static final int MINIMUM_IDLE=Integer.parseInt(configManager.getProperty("MINIMUM_IDLE"));
 	public static final int CONNECTION_TIMEOUT=Integer.parseInt(configManager.getProperty("CONNECTION_TIMEOUT"));
