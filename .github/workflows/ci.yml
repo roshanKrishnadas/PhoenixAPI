@@ -2,7 +2,7 @@ name: Phoenix API Automation
 
 on:
   push:
-    branches: ["master"]
+    branches: ["master","db_secret_management_practise"]
 
   pull_request:
     branches: ["master"]
