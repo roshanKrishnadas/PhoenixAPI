@@ -55,7 +55,7 @@ public class CreateJobAPIWithDBValidationTest {
 	problem=new ArrayList<Problems>();
 		problem.add(problem1);
 		
-		customerproduct=new FDCustomerProduct(DateTimeUtil.getTimeWithDaysAgo(01), "227467497792798", "227467497792798", "227467497792798", DateTimeUtil.getTimeWithDaysAgo(01), Product.NEXUS_2.getCode(), MstModelId.Nexus_2blue.getMstModelId());
+		customerproduct=new FDCustomerProduct(DateTimeUtil.getTimeWithDaysAgo(01), "627467497792798", "627467497792798", "627467497792798", DateTimeUtil.getTimeWithDaysAgo(01), Product.NEXUS_2.getCode(), MstModelId.Nexus_2blue.getMstModelId());
 		 customerAdd=new FDCustomerAddess("ganeshflat", "namse_aprt", "gajANANJI", "wolahah", "400708", "560024", "mh", "");
 		 customer= new FdCustomerData("rojks", "hmos", "1834967893", "", "hosaa@gmail.com", "");
 		createjobfd=new CreateJobFD(ServiceLocation.SERVICE_LOCATION_A.getCode(), Platform.Front_Desk.getCode(), Warranty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getCode(), customer, customerAdd, customerproduct, problem);
