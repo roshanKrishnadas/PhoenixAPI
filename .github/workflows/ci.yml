@@ -2,7 +2,7 @@ name: Phoenix API Automation
 
 on:
   push:
-    branches: ["master","feature/r14-db-secrets-management"]
+    branches: ["master"]
 
   pull_request:
     branches: ["master"]
