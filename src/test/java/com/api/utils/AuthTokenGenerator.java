@@ -6,6 +6,10 @@ import static io.restassured.http.ContentType.JSON;
 
 import static org.hamcrest.Matchers.*;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import static com.api.constant.Role.*;
 
 import com.api.constant.Role;
@@ -14,11 +18,16 @@ import com.api.request.model.UserCredentails;
 import static com.api.utils.configManager.*;
 
 public class AuthTokenGenerator {
+	
+	private static Map<Role, String> tokenCache=new ConcurrentHashMap<Role, String>();
 
 	private AuthTokenGenerator() {
 		
 	}
 	public static String getToken(Role role) {
+		if(tokenCache.containsKey(role)) {
+			return tokenCache.get(role);
+		}
 		UserCredentails user=null;
 		if(role==FD) {
 			user=new UserCredentails("iamfd","password");
@@ -50,6 +59,7 @@ public class AuthTokenGenerator {
 		 .getString("data.token");
 		
 		System.out.println("------------------------");
+		tokenCache.put(role, token);
 		return token;
 	}
 
