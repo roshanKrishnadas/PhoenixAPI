@@ -4,14 +4,21 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import com.api.utils.EnvUtility;
+import com.api.utils.VaultDbConfig;
 import com.api.utils.configManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 public class DataBaseManager {
-	public static final String DB_URL=EnvUtility.getValue("DB_URL");
-	public static final String DB_USER_NAME=EnvUtility.getValue("DB_USERNAME");
-	public static final String DB_PASSWORD= EnvUtility.getValue("DB_PASSWORD");
+	/*
+	 * public static final String DB_URL=EnvUtility.getValue("DB_URL"); public
+	 * static final String DB_USER_NAME=EnvUtility.getValue("DB_USERNAME"); public
+	 * static final String DB_PASSWORD= EnvUtility.getValue("DB_PASSWORD");
+	 */
+	public static boolean isVaultUp=true;
+	public static final String DB_URL=loadSecret("DB_URL");
+	public static final String DB_USER_NAME=loadSecret("DB_USERNAME");
+	public static final String DB_PASSWORD= loadSecret("DB_PASSWORD");
 	public static final int MAXIMUM_POOL_SIZE=Integer.parseInt(configManager.getProperty("MAXIMUM_POOL_SIZE"));
 	public static final int MINIMUM_IDLE=Integer.parseInt(configManager.getProperty("MINIMUM_IDLE"));
 	public static final int CONNECTION_TIMEOUT=Integer.parseInt(configManager.getProperty("CONNECTION_TIMEOUT"));
@@ -23,6 +30,25 @@ public class DataBaseManager {
 	
 	public  static Connection con;
 	
+	private static String loadSecret(String key) {
+		String value=null;
+		if(isVaultUp) {
+		value=VaultDbConfig.getSecret(key);
+		if(value==null) {
+			System.out.println("Vault is down or issue with vault");
+			isVaultUp=false;
+		}
+		else {
+			System.out.println("Reading valur  from vault ...........");
+			
+			return value;
+		}
+		}	
+		System.out.println("Reading value from ENV ...........");
+		value=EnvUtility.getValue(key);
+		return value;
+		
+	}
 	
 	private  static void initializePool() {
 		
