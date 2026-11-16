@@ -1,21 +1,22 @@
 package com.api.test.datadriven;
 
-import static io.restassured.RestAssured.given;
+import static com.api.utils.SpecUtil.responseSpec_OK;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
-
-import java.io.IOException;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.api.request.model.UserCredentails;
+import com.api.services.AuthServices;
 import com.dataproviders.api.bean.UserBEAN;
 
-import static com.api.utils.SpecUtil.*;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.*;
-
 public class LoginAPIExcelDataProviderTest {
+	private AuthServices authservice;
+	
+	@BeforeMethod(description = "Initializing the authservice")
+	public void setUp() {
+		authservice=new AuthServices();
+	}
 	
     @Test(description = "Verifying the loging API for FD user",
     		groups = {"api","regression","datadriven"},
@@ -25,10 +26,7 @@ public class LoginAPIExcelDataProviderTest {
     		)
 	public void loginTest(UserBEAN user)  {
     	
-		  given()
-		     .spec(requestSpec(user))
-		    .when()
-		     .post("login")
+    	authservice.login(user)
 		  .then() 
 		  .spec(responseSpec_OK())
 		  .body("message",equalTo("Success"))
