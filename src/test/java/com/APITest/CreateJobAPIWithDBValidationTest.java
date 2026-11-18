@@ -23,6 +23,7 @@ import com.api.request.model.FDCustomerAddess;
 import com.api.request.model.FDCustomerProduct;
 import com.api.request.model.FdCustomerData;
 import com.api.request.model.Problems;
+import com.api.services.JobService;
 import com.api.utils.DateTimeUtil;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
@@ -42,10 +43,12 @@ import static com.api.utils.SpecUtil.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class CreateJobAPIWithDBValidationTest {
+	
 	private CreateJobFD createjobfd;
 	private FdCustomerData customer;
 	private FDCustomerAddess customerAdd;
 	private FDCustomerProduct customerproduct;
+	private JobService jobservice;
 	List<Problems> problem;
 	//probel pojo class
 	@BeforeTest(description="creates the CreateJobAPI payload ")
@@ -59,16 +62,15 @@ public class CreateJobAPIWithDBValidationTest {
 		 customerAdd=new FDCustomerAddess("ganeshflat", "namse_aprt", "gajANANJI", "wolahah", "400708", "560024", "mh", "");
 		 customer= new FdCustomerData("rojks", "hmos", "1834967893", "", "hosaa@gmail.com", "");
 		createjobfd=new CreateJobFD(ServiceLocation.SERVICE_LOCATION_A.getCode(), Platform.Front_Desk.getCode(), Warranty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getCode(), customer, customerAdd, customerproduct, problem);
+		jobservice=new JobService();
 	}
 	@Test(description="verifying the CreateJobAPITest is able to create the IN-Warranty job",groups= {"api","regression","smoke"})
 	public void createJobTest() {
 		
- Response response = given()
-		          .spec(requestWithAuth(Role.FD, createjobfd))
-		        .when()
-	              .post("/job/create")
-	            .then()
-	              .spec(responseSpec_OK())
+ Response response =
+		            jobservice.create(Role.FD, createjobfd)
+	               .then()
+	               .spec(responseSpec_OK())
 	               .body(matchesJsonSchemaInClasspath("Response_Schema/CreateJOBFD.json"))
 	               .body("message", Matchers.equalTo("Job created successfully. "))
 	               .body("data.mst_service_location_id", Matchers.equalTo(1))

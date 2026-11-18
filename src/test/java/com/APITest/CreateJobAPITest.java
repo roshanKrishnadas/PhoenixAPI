@@ -22,6 +22,7 @@ import com.api.request.model.FDCustomerAddess;
 import com.api.request.model.FDCustomerProduct;
 import com.api.request.model.FdCustomerData;
 import com.api.request.model.Problems;
+import com.api.services.JobService;
 import com.api.utils.DateTimeUtil;
 import static com.api.utils.SpecUtil.*;
 
@@ -29,10 +30,13 @@ import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class CreateJobAPITest {
 	private CreateJobFD createjobfd;
+	private JobService jobservice;
+	
 	//probel pojo class
-	@BeforeTest(description="creates the CreateJobAPI payload ")
+	@BeforeTest(description="creates the CreateJobAPI payload and instantiating the jobservice ")
 	public void setUp() {
 		Problems problem1=new Problems(Problem.Poor_battery_life.getCode(), "screen issue");
+		jobservice=new JobService();
 		//declaration initilaizatio of array type is Problems which we have created the POJO
 		List<Problems>problem=new ArrayList<Problems>();
 		problem.add(problem1);
@@ -41,14 +45,12 @@ public class CreateJobAPITest {
 		FDCustomerAddess customerAdd=new FDCustomerAddess("helloflAT", "namsate aprt", "gajANAN", "wola", "400708", "560023", "mh", "");
 		FdCustomerData customer= new FdCustomerData("ros", "hos", "1234967891", "", "hos@gmail.com", "");
 		createjobfd=new CreateJobFD(ServiceLocation.SERVICE_LOCATION_A.getCode(), Platform.Front_Desk.getCode(), Warranty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getCode(), customer, customerAdd, customerproduct, problem);
+		
 	}
 	@Test(description="verifying the CreateJobAPITest is able to create the IN-Warranty job",groups= {"api","regression","smoke"})
 	public void createJobTest() {
 		
-		given()
-		  .spec(requestWithAuth(Role.FD, createjobfd))
-		 .when()
-	  .post("/job/create")
+		jobservice.create(Role.FD, createjobfd)
 	.then()
 	 .spec(responseSpec_OK())
 	 .body(matchesJsonSchemaInClasspath("Response_Schema/CreateJOBFD.json"))

@@ -7,20 +7,26 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.notNullValue;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.constant.Role;
+import com.api.services.MasterService;
+
 import static com.api.utils.SpecUtil.*;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class MasterFDAPITest {
+	private MasterService masterservice;
+	
+	@BeforeMethod(description ="initailizing the masterservice")
+	public void setup() {
+		masterservice=new MasterService();
+	}
 	@Test(description="verifying the MAsterAPI is giving correct Response",groups= {"api","regression","smoke"})
 	public void createJobFd() {
-		given()
-		.spec(requestWithAuth(Role.FD))
-	   .when()
-	    .post("/master")
+		masterservice.master(Role.FD)
 	   .then()
 	    .spec(responseSpec_OK())
 	    .body("message", equalTo("Success"))
@@ -39,10 +45,7 @@ public class MasterFDAPITest {
 	}
 	@Test(description="verifying the MasterAPI  is giving 401 status code for invalid token",groups= {"api","negative","regression","smoke"})
 	public void createJob_MissingHeaders() {
-		given()
-		.spec(requestSpec())
-	   .when()
-	    .post("/master")
+		masterservice.masterWithNoAuth()
 	   .then()
 	    .spec(responseSpec_textHTML(401));
 	}
