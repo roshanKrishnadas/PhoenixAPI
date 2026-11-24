@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.api.constant.Role;
 import com.api.request.model.CreateJobFD;
 import com.api.request.model.FdCustomerData;
+import com.api.services.JobService;
 import com.api.utils.FakerDataGenerator;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
@@ -23,19 +24,18 @@ import com.database.models.CustomerJobHeadDBModel;
 
 public class CreateJobAPIFakerDBValidationTest {
 	private CreateJobFD createjobfd;
+	private JobService jobservice;
 	
 	//probel pojo class
-	@BeforeTest(description="creates the CreateJobAPI payload ")
+	@BeforeTest(description="creates the CreateJobAPI payload and instatntiating the jobservice ")
 	public void setUp() {
 		createjobfd=FakerDataGenerator.generateFakerCreateJobData();
+		jobservice=new JobService();
 	}
 	@Test(description="verifying the CreateJobAPITest is able to create the IN-Warranty job",groups= {"api","regression","smoke"})
 	public void createJobTest() {
 		
-	int customerId=	given()
-		             .spec(requestWithAuth(Role.FD, createjobfd))
-		           .when()
-	                 .post("/job/create")
+	int customerId=	jobservice.create(Role.FD, createjobfd)
 	               .then()
 	                 .spec(responseSpec_OK())
 	                 .body(matchesJsonSchemaInClasspath("Response_Schema/CreateJOBFD.json"))

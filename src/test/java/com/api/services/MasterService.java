@@ -1,0 +1,32 @@
+package com.api.services;
+
+import static com.api.utils.SpecUtil.requestSpec;
+import static com.api.utils.SpecUtil.requestWithAuth;
+import static io.restassured.RestAssured.given;
+
+import com.api.constant.Role;
+
+import io.restassured.response.Response;
+
+public class MasterService {
+	
+	private static final String MASTER_ENDPOINT="/master";
+	
+	public Response master(Role role) {
+	Response response=	given()
+		.spec(requestWithAuth(role))
+	   .when()
+	    .post(MASTER_ENDPOINT);
+	    
+	    return response;
+	}
+	public Response masterWithNoAuth() {
+		Response response=	given()
+				.spec(requestSpec())
+		   .when()
+		    .post(MASTER_ENDPOINT);
+		    
+		    return response;
+		}
+
+}

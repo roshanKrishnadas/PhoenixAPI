@@ -24,6 +24,7 @@ import com.api.request.model.FDCustomerAddess;
 import com.api.request.model.FDCustomerProduct;
 import com.api.request.model.FdCustomerData;
 import com.api.request.model.Problems;
+import com.api.services.JobService;
 import com.api.utils.DateTimeUtil;
 import com.api.utils.FakerDataGenerator;
 import com.github.javafaker.Faker;
@@ -34,19 +35,18 @@ import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class CreateJobAPIFakerTest {
 	private CreateJobFD createjobfd;
+	private JobService jobservice;
 	
 	//probel pojo class
 	@BeforeTest(description="creates the CreateJobAPI payload ")
 	public void setUp() {
 		createjobfd=FakerDataGenerator.generateFakerCreateJobData();
+		jobservice=new JobService();
 	}
 	@Test(description="verifying the CreateJobAPITest is able to create the IN-Warranty job",groups= {"api","regression","smoke"})
 	public void createJobTest() {
 		
-		given()
-		  .spec(requestWithAuth(Role.FD, createjobfd))
-		 .when()
-	  .post("/job/create")
+		jobservice.create(Role.FD, createjobfd)
 	.then()
 	 .spec(responseSpec_OK())
 	 .body(matchesJsonSchemaInClasspath("Response_Schema/CreateJOBFD.json"))
